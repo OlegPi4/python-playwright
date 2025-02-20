@@ -5,7 +5,7 @@ BUTTON = '#submit-id-submit'
 RESULT = '#result-text'
 
 class SimplePage(BasePage):
-    url = 'https://www.qa-practice.com/elements/button/simple'
+    url = '/button/simple'
     def check_button_exists(self):
         button = self.page.locator(BUTTON)
         expect(button).to_be_visible()
