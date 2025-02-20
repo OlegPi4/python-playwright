@@ -2,12 +2,12 @@ import pytest
 from playwright.sync_api import Page, expect
 
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_timeout(page):
     page.goto('https://www.qa-practice.com')
     page.screenshot(type='jpeg', path='screen.jpeg')
 
-@pytest.mark.skip
+# @pytest.mark.skip
 def test_drag_and_drop(page: Page):
     page.goto('https://www.qa-practice.com/elements/dragndrop/boxes')
     expect(page.locator('h1')).to_have_text('Drag-n-drop')
