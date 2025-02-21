@@ -6,6 +6,7 @@ from pages.base_page import BasePage
 input_email = 'css=[name="email"]'
 input_password = 'css=[name="password"]'
 
+
 class AuthPage(BasePage):
     url = 'auth/login'
 
@@ -31,8 +32,8 @@ class AuthPage(BasePage):
         self.enter_password(password)
         self.click_login_button()
 
-    def check_success_login(self):
-        expect(self.page).to_have_url(re.compile('auth/profile'))
+    def check_success_login(self, expected):
+        expect(self.page).to_have_url(re.compile(expected))
         
     def click_forgot_password(self):
         login_button = self.page.get_by_role('button', name='Забули пароль?' )
@@ -45,13 +46,15 @@ class AuthPage(BasePage):
         login_button.click()
         expect(self.page).to_have_url(re.compile('/auth/signup'))
     
-    def check_error_login(self, error_mes):
-        message_error = self.page.locator('.text-red')
+    def check_error_login(self, id, expected):
+        message_error = self.page.locator('div.text-red')
         
-        if message_error.inner_text() == error_mes:
+        if message_error.inner_text() == expected:
             print(message_error.inner_text())
             expect(self.page)   
         else:
+            file = f'{id}screen.jpeg'
+            self.page.screenshot(type='jpeg', path=file)
             print(message_error.inner_text())
             expect(self.page).to_have_title('!!!')
        
